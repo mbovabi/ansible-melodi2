@@ -31,8 +31,10 @@ jobs:
           echo "${{ secrets.ANSIBLE_SSH_KEY }}" > ansible-key
           chmod 400 ansible-key
 
-      - name: Run Playbook
-        run: |
-          ansible-playbook -i aws_ec2.yml  --private-key "{{ secrets.ANSIBLE_SSH_KEY }}" main.yml -u ec2-user -b 
 
-      # Test
+      - name: Run Playbook
+        uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.ANSIBLE_SSH_KEY }}
+        run: |
+          ansible-playbook -i aws_ec2.yml  main.yml -u ec2-user -b 
