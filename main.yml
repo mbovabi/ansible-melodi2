@@ -22,11 +22,16 @@
       state: started
       enabled: yes
 
+  - name: Recursively remove directory
+    ansible.builtin.file:
+      path: /var/www/html/melodi
+      state: absent
+
   - name: pull melodi
     git:
       repo: "{{ melodi_repo }}"
       version: "{{ melodi_branch }}"
-      dest: /var/www/html/melodi2
+      dest: /var/www/html/melodi
       force: yes
 
   - name: recursively change ownership of a directory
