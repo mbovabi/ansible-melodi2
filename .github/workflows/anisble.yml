@@ -1,0 +1,37 @@
+name: Ansible
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      ANSIBLE_HOST_KEY_CHECKING: False
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+
+    steps:
+      # Checkout/Clone Repo
+      - uses: actions/checkout@v3
+
+      - name: Install boto3, botocore
+        run: |
+          . /opt/pipx/venvs/ansible-core/bin/activate
+          /opt/pipx/venvs/ansible-core/bin/python -m pip install boto3 botocore
+
+      - name: Generate SSH Key
+        run: |
+          echo "${{ secrets.ANSIBLE_SSH_KEY }}" > ansible-key
+          chmod 400 ansible-key
+
+      - name: Run Playbook
+        run: ansible-playbook -i aws_ec2.yml  --private-key ansible-key main.yml -u ec2-user -b 
+
+      # Test
