@@ -27,13 +27,6 @@
       path: /var/www/html/melodi
       state: absent
 
-  - name: pull melodi
-    git:
-      repo: "{{ melodi_repo }}"
-      version: "{{ melodi_branch }}"
-      dest: /var/www/html/melodi
-      force: yes
-
   - name: recursively change ownership of a directory
     file:
       path: /var/www/html
