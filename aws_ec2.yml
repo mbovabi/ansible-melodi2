@@ -4,4 +4,7 @@ regions:
 hostnames:
   - tag:Name
 compose:
-  ansible_host: 34.229.244.215
+  ansible_host: public_ip_address
+keyed_groups:
+  - key: tags['Environment']
+    separator: ''
