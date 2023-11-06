@@ -26,7 +26,7 @@
     git:
       repo: "{{ melodi_repo }}"
       version: "{{ melodi_branch }}"
-      dest: /var/www/html/
+      dest: /var/www/html/melodi
       force: yes
 
   - name: recursively change ownership of a directory
