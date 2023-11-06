@@ -39,5 +39,4 @@ jobs:
         
       - name: Run playbook
         run: |
-          git config --global --add safe.directory /var/www/html
           ansible-playbook -i aws_ec2.yml  main.yml -u ec2-user -b 
