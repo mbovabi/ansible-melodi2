@@ -36,4 +36,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.ANSIBLE_SSH_KEY }}
+        
+      - name: Run playbook
+        run: |
           ansible-playbook -i aws_ec2.yml  main.yml -u ec2-user -b 
