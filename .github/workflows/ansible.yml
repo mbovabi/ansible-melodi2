@@ -32,7 +32,7 @@ jobs:
           chmod 400 ansible-key
 
 
-      - name: Run Playbook
+      - name: Setup SSH Agent
         uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.ANSIBLE_SSH_KEY }}
