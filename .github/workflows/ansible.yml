@@ -26,12 +26,6 @@ jobs:
           . /opt/pipx/venvs/ansible-core/bin/activate
           /opt/pipx/venvs/ansible-core/bin/python -m pip install boto3 botocore
 
-      - name: Generate SSH Key
-        run: |
-          echo "${{ secrets.ANSIBLE_SSH_KEY }}" > ansible-key
-          chmod 400 ansible-key
-
-
       - name: Setup SSH Agent
         uses: webfactory/ssh-agent@v0.5.2
         with:
