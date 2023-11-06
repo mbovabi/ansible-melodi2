@@ -33,6 +33,6 @@ jobs:
 
       - name: Run Playbook
         run: |
-          ansible-playbook -i aws_ec2.yml  --private-key "{{ secrets.ANSIBLE_KEY }}" main.yml -u ec2-user -b 
+          ansible-playbook -i aws_ec2.yml  --private-key "{{ secrets.ANSIBLE_SSH_KEY }}" main.yml -u ec2-user -b 
 
       # Test
